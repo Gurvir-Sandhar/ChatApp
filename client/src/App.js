@@ -1,4 +1,5 @@
 import './App.css';
+import Login from './Login.js'
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
           Chat App
         </h1>
       </header>
+      <Login />
     </div>
   );
 }
