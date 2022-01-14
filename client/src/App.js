@@ -1,14 +1,11 @@
 import './App.css';
 import Login from './Login.js'
+import Header from './Header.js'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>
-          Chat App
-        </h1>
-      </header>
+      <Header />
       <Login />
     </div>
   );

@@ -1,0 +1,10 @@
+h1 {
+        background-color: #282c34;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: calc(30px + 2vmin);
+        color: white;
+        padding: 10px;
+    }
