@@ -1,10 +1,10 @@
 import React, { Component } from "react"
-import './App.css';
+import { Link } from "react-router-dom"
 import Login from './Login.js'
 import Header from './Header.js'
 
 class App extends React.Component {
-    state = {
+    /*state = {
       data: null
     }
 
@@ -22,7 +22,7 @@ class App extends React.Component {
             throw Error(body.message)
         }
         return body;
-    }
+    }*/
 
     render() {
         return (
