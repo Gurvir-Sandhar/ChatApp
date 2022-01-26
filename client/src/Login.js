@@ -2,23 +2,33 @@ import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import "./Login.css"
+const axios = require('axios');
 
 class Login extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            name: 'null',
-            password: 'null'
+            username: '',
+            password: ''
         }
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         let obj = {
-            name: e.target.name.value,
+            username: e.target.name.value,
             password: e.target.password.value
         }
-        this.setState(obj) 
+        this.setState(obj);
+
+        /*fetch('http://localhost:5000/login', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify(obj)
+        })*/
+        axios
+            .post('http://localhost:5000/login', obj)
+            .then(response => console.log(response))
     }
 
     render() {
