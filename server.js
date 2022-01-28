@@ -36,6 +36,7 @@ app.post('/login', (req,res) => {
         } else {
             user.save();
         }
+        res.send(true);
     })
 })
 

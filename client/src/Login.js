@@ -28,7 +28,14 @@ class Login extends React.Component {
         })*/
         axios
             .post('http://localhost:5000/login', obj)
-            .then(response => console.log(response))
+            .then(response => {
+                console.log("this is the resposne")
+                let myfunc = this.props.isLoggedIn;
+                myfunc()
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     render() {

@@ -2,13 +2,25 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import Login from './Login.js'
 import Header from './Header.js'
+import Chat from './Chat.js'
 
 class App extends React.Component {
-    /*state = {
-        data: null
+    constructor(props){
+        super(props);
+        this.state = {
+            name: '',
+            loggedIn: false
+        }
+        this.isLoggedIn = this.isLoggedIn.bind(this);
     }
 
-    componentDidMount() {
+    isLoggedIn = () => {
+        this.setState({
+            loggedIn: !this.state.loggedIn
+        })
+    }
+
+    /*componentDidMount() {
         this.callBackendAPI()
             .then(res => this.setState({data: res.express}))
             .catch(err => console.log(err));
@@ -25,10 +37,11 @@ class App extends React.Component {
     }*/
 
     render() {
+        const loggedIn = this.state.loggedIn;
         return (
             <div className="App">
                 <Header />
-                <Login />
+                { loggedIn ? <Chat isLoggedIn={this.isLoggedIn} /> : <Login isLoggedIn={this.isLoggedIn} /> }
             </div>
         )
     };
