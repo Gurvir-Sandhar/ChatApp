@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import { Link } from "react-router-dom"
+import React from "react"
+//import { Link } from "react-router-dom"
 import Login from './Login.js'
 import Header from './Header.js'
 import Chat from './Chat.js'

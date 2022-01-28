@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React  from "react"
 
 class Chat extends React.Component {
 
