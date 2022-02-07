@@ -1,9 +1,17 @@
 require("dotenv").config();
-
+const Socket = require("socket.io");
 const cors = require('cors');
 const express = require('express');
 const app = express();
+const http = require('http');
 const port =  process.env.PORT || 5000;
+
+const server = http.createServer(app);
+const io = Socket(server, {
+    cors: {
+        origin: "http://localhost:3000"
+    }
+});
 
 
 //mongoose code
@@ -49,6 +57,11 @@ app.post('/login', (req,res) => {
 })
 
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Listening on Port: ${port} `);
+})
+
+
+io.on("connection", (socket) => {
+    console.log(socket.id)
 })
