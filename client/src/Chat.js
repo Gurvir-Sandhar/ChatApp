@@ -1,26 +1,22 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import "./Chat.css"
 import { io } from "socket.io-client";
 
-class Chat extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            random: ""
+function Chat (){
+    const [random, setRandom] = useState("");
+
+    useEffect(
+        () => {
+            const socket = io("http://localhost:5000")
+            socket.on("connect", () => {
+                console.log(socket.id);
+            })
         }
-    }
+    )
 
-    componenteDidMount(){
-        const socket = io("https://localhost:5000")
-        socket.on("connect", () => {
-            console.log(socket.id)
-        })
-    }
-
-    render() {
-        return (
+    return(
             <div className="chat-parent">
                 <div className="div-row">
                     <div className="chat-box">chat box</div>
@@ -35,10 +31,7 @@ class Chat extends React.Component {
                     </Form>
                 </div>
             </div>
-
-        )
-    }
-
+    )
 }
 
 export default Chat;
