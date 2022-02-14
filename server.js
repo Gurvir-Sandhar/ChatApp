@@ -38,6 +38,7 @@ app.use(express.json());
 
 //mongoose models
 let User = require('./models/userModel.js');
+const { info } = require("console");
 
 
 //routes
@@ -63,5 +64,9 @@ server.listen(port, () => {
 
 
 io.on("connection", (socket) => {
-    console.log(socket.id)
+    console.log(socket.id + " connected")
+})
+
+io.on('disconnected', (socket) => {
+    console.log(socket.id + "disconnected")
 })
