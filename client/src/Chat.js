@@ -5,42 +5,44 @@ import "./Chat.css"
 import { io } from "socket.io-client";
 import $ from "jquery";
 
-function Chat (){
-    const [random, setRandom] = useState("");
+const socket = io("http://localhost:5000")
 
-    const chatDiv = useRef(null);
+function Chat (props){
+    const [Username, setUsername] = useState("");
 
-    useEffect(
-        () => {
-            const socket = io("http://localhost:5000")
-            socket.on("connect", () => {
+    useEffect(() => {
+            if(Username === ""){
+                setUsername(props.username)
+            }
+            console.log(Username)
+            socket.on("connection", () => {
                 console.log(socket.id);
             })
             socket.on("connect_error", () => {
                 setTimeout(() => socket.connect(), 5000);
             })
-            socket.on("message", () => {
-                //send message to server
+            socket.on("userMessage", (data) => {
+                let elem = document.getElementById("chatDiv");
+                elem.innerHTML += `<div class="userMsg">${data.message}</div>`;
+                elem.scrollTop = elem.scrollHeight;
             })
-            socket.on("emit", () => {
-                //receive and print messages from server
-            })
-        }
+        }, []
     )
 
     const submitMessage = (e) => {
         e.preventDefault();
+        let msg = e.target.chat.value
         let elem = document.getElementById("chatDiv")
-        elem.innerHTML +=`<div class="myMsg">${e.target.chat.value}</div>`;
+        elem.innerHTML +=`<div class="myMsg">${msg}</div>`;
         elem.scrollTop = elem.scrollHeight;
         $("#textarea").val("")
+        socket.emit("message", { name: Username, message: msg});
     }
-
 
     return(
             <div className="chat-parent">
                 <div className="div-row">
-                    <div className="chat-box" id="chatDiv" ref={chatDiv}></div>
+                    <div className="chat-box" id="chatDiv"></div>
                     <div className="user-list"> user list</div>
                 </div>
                 <div className="user-input">

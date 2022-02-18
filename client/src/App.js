@@ -20,6 +20,12 @@ class App extends React.Component {
         })
     }
 
+    setUserName = (username) => {
+        this.setState({
+            name: username
+        })
+    }
+
     /*componentDidMount() {
         this.callBackendAPI()
             .then(res => this.setState({data: res.express}))
@@ -41,7 +47,7 @@ class App extends React.Component {
         return (
             <div className="App">
                 <Header />
-                { loggedIn ? <Chat isLoggedIn={this.isLoggedIn} /> : <Login isLoggedIn={this.isLoggedIn} /> }
+                { loggedIn ? <Chat isLoggedIn={this.isLoggedIn}  username={this.state.name}/> : <Login isLoggedIn={this.isLoggedIn} setUserName={this.setUserName} /> }
             </div>
         )
     };

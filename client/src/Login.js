@@ -20,6 +20,8 @@ class Login extends React.Component {
             password: e.target.password.value
         }
         this.setState(obj);
+        //let setName = this.props.setUsername;
+        this.props.setUserName(obj.username);
         axios
             .post('http://localhost:5000/login', obj)
             .then(response => {

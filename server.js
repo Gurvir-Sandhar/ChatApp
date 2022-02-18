@@ -9,10 +9,11 @@ const port =  process.env.PORT || 5000;
 const server = http.createServer(app);
 const io = Socket(server, {
     cors: {
-        origin: "http://localhost:3000"
+        origin: '*'
     }
 });
 
+const userList = [];
 
 //mongoose code
 const mongoose = require('mongoose');
@@ -53,6 +54,7 @@ app.post('/login', (req,res) => {
         } else {
             user.save();
         }
+        userList.push(req.body.username);
         res.send(true);
     })
 })
@@ -63,10 +65,15 @@ server.listen(port, () => {
 })
 
 
+//socket stuff
 io.on("connection", (socket) => {
     console.log(socket.id + " connected")
-})
+    socket.on('message', msg => {
+        console.log(msg)
+        socket.broadcast.emit("userMessage", msg);
+    })
+})  
 
-io.on('disconnected', (socket) => {
+io.on('disconnect', (socket) => {
     console.log(socket.id + "disconnected")
 })
