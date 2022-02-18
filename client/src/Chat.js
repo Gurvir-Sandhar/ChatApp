@@ -23,7 +23,10 @@ function Chat (props){
             })
             socket.on("userMessage", (data) => {
                 let elem = document.getElementById("chatDiv");
-                elem.innerHTML += `<div class="userMsg">${data.message}</div>`;
+                elem.innerHTML += `<div class="userMsg">
+                                    <div class="name">${data.name}</div>
+                                    <div class="graymsg">${data.message}</div>
+                                    </div>`;
                 elem.scrollTop = elem.scrollHeight;
             })
         }, []
@@ -33,7 +36,10 @@ function Chat (props){
         e.preventDefault();
         let msg = e.target.chat.value
         let elem = document.getElementById("chatDiv")
-        elem.innerHTML +=`<div class="myMsg">${msg}</div>`;
+        elem.innerHTML +=`<div class="myMsg">
+                            <div class="name">You</div>
+                            <div class="msg">${msg}</div>
+                            </div>`;
         elem.scrollTop = elem.scrollHeight;
         $("#textarea").val("")
         socket.emit("message", { name: Username, message: msg});

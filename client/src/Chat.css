@@ -29,20 +29,31 @@
     margin-top: 5px;
 }
 
-.myMsg {
-    background-color: #009FFF;
-    color: white;
-    margin-left: auto;
+.msg {
     padding: 3px 6px;
     border-radius: 20px;
+    background-color: #009FFF;
+}
+
+.name {
+    color: gray;
+}
+
+.myMsg {
+    color: white;
+    margin-left: auto;
     margin-top: 5px;
 }
 
 .userMsg {
-    background-color: gray;
     color: white;
     margin-right: auto;
-    padding: 3px 6px;
-    border-radius: 20px;
     margin-top: 5px;
 }
+
+.graymsg {
+    background-color: gray;
+    padding: 3px 6px;
+    border-radius: 20px;
+}
+
