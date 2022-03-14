@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import GoogleLogin from 'react-google-login'
 import "./Login.css"
 const axios = require('axios');
 
@@ -33,10 +34,14 @@ class Login extends React.Component {
             })
     }
 
+    responseGoogle = (response) => {
+        console.log(response);
+    }
+
     render() {
         return (
             <Form className="login-form" onSubmit={this.handleSubmit}>
-                <h2>Login</h2>
+                <h2>Guest Login</h2>
                 <Form.Group className="mb-3" controlId="usernameID">
                     <Form.Label>Username:</Form.Label>
                     <Form.Control name='name' type="text" placeholder="Enter Username" />
@@ -48,6 +53,14 @@ class Login extends React.Component {
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
+                <div>or</div>
+                <GoogleLogin
+                    clientId={process.env.OAUTH_CLIENT_ID}
+                    buttonText="Login with Google"
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                />
             </Form>
         )
     }
