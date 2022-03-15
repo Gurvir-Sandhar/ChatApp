@@ -12,6 +12,7 @@ class Login extends React.Component {
             username: '',
             password: ''
         }
+        console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID)
     }
 
     handleSubmit = (e) => {
@@ -46,20 +47,20 @@ class Login extends React.Component {
                     <Form.Label>Username:</Form.Label>
                     <Form.Control name='name' type="text" placeholder="Enter Username" />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="passwordID">
+                {/*<Form.Group className="mb-3" controlId="passwordID">
                     <Form.Label>Password:</Form.Label>
                     <Form.Control name='password' type="text" placeholder="Enter Password" />
-                </Form.Group>
+                </Form.Group>*/}
                 <Button variant="primary" type="submit">
-                    Submit
+                    Login as Guest
                 </Button>
                 <div>or</div>
                 <GoogleLogin
-                    clientId={process.env.OAUTH_CLIENT_ID}
+                    clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                     buttonText="Login with Google"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
-                    cookiePolicy={'single_host_origin'}
+                    isSignedIn={true}
                 />
             </Form>
         )
