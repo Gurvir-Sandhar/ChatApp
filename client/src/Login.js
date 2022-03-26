@@ -7,23 +7,20 @@ const axios = require('axios');
 
 class Login extends React.Component {
     constructor(props){
-        super(props);
-        this.state = {
-            username: '',
-            password: ''
-        }
-        console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID)
+        super(props)
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.responseGoogleError = this.responseGoogleError.bind(this);
+        this.responseGoogle = this.responseGoogle.bind(this);
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         let obj = {
             username: e.target.name.value,
-            password: e.target.password.value
         }
-        this.setState(obj);
-        //let setName = this.props.setUsername;
-        this.props.setUserName(obj.username);
+        let image = "./public/guest.jpg"
+        this.props.setUserName(obj.username, image);
         axios
             .post('http://localhost:5000/login', obj)
             .then(response => {
@@ -35,8 +32,15 @@ class Login extends React.Component {
             })
     }
 
+    responseGoogleError = (response) => {
+        alert(response)
+    }
+
     responseGoogle = (response) => {
-        console.log(response);
+        let profile = response.profileObj;
+        console.log(profile);
+        this.props.setUserName(profile.name, profile.imageUrl)
+        this.props.isLoggedIn();
     }
 
     render() {
@@ -59,7 +63,7 @@ class Login extends React.Component {
                     clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                     buttonText="Login with Google"
                     onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
+                    onFailure={this.responseGoogleError}
                     isSignedIn={true}
                 />
             </Form>
