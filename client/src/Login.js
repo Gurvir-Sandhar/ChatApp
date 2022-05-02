@@ -33,7 +33,7 @@ class Login extends React.Component {
     }
 
     responseGoogleError = (response) => {
-        alert(response)
+        alert("Google ERROR" + response)
     }
 
     responseGoogle = (response) => {
@@ -64,7 +64,7 @@ class Login extends React.Component {
                     buttonText="Login with Google"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogleError}
-                    isSignedIn={true}
+                    isSignedIn={false}
                 />
             </Form>
         )
