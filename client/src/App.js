@@ -9,9 +9,11 @@ class App extends React.Component {
         super(props);
         this.state = {
             name: '',
+            imageURL: '',
             loggedIn: false
         }
         this.isLoggedIn = this.isLoggedIn.bind(this);
+        this.setUserName = this.setUserName.bind(this)
     }
 
     isLoggedIn = () => {
@@ -20,9 +22,10 @@ class App extends React.Component {
         })
     }
 
-    setUserName = (username) => {
+    setUserName = (username, image) => {
         this.setState({
-            name: username
+            name: username,
+            imageURL: image
         })
     }
 
@@ -47,7 +50,7 @@ class App extends React.Component {
         return (
             <div className="App">
                 <Header />
-                { loggedIn ? <Chat isLoggedIn={this.isLoggedIn}  username={this.state.name}/> : <Login isLoggedIn={this.isLoggedIn} setUserName={this.setUserName} /> }
+                { loggedIn ? <Chat isLoggedIn={this.isLoggedIn}  username={this.state.name} image={this.state.imageURL}/> : <Login isLoggedIn={this.isLoggedIn} setUserName={this.setUserName} /> }
             </div>
         )
     };

@@ -14,7 +14,7 @@ function Chat (props){
             if(Username === ""){
                 setUsername(props.username)
             }
-            console.log(Username)
+            console.log("username: " + Username)
             socket.on("connection", () => {
                 console.log(socket.id);
             })
@@ -23,9 +23,11 @@ function Chat (props){
             })
             socket.on("userMessage", (data) => {
                 let elem = document.getElementById("chatDiv");
-                elem.innerHTML += `<div class="userMsg">
+                elem.innerHTML += `
+                                    <div class="userMsg">
                                     <div class="name">${data.name}</div>
                                     <div class="graymsg">${data.message}</div>
+                                    
                                     </div>`;
                 elem.scrollTop = elem.scrollHeight;
             })
@@ -36,9 +38,11 @@ function Chat (props){
         e.preventDefault();
         let msg = e.target.chat.value
         let elem = document.getElementById("chatDiv")
-        elem.innerHTML +=`<div class="myMsg">
+        elem.innerHTML +=`  
+                            <div class="myMsg">
                             <div class="name">You</div>
                             <div class="msg">${msg}</div>
+                            
                             </div>`;
         elem.scrollTop = elem.scrollHeight;
         $("#textarea").val("")
@@ -49,7 +53,7 @@ function Chat (props){
             <div className="chat-parent">
                 <div className="div-row">
                     <div className="chat-box" id="chatDiv"></div>
-                    <div className="user-list"> user list</div>
+                    {/*<div className="user-list"> user list</div>*/}
                 </div>
                 <div className="user-input">
                     <Form className="form" onSubmit={submitMessage}>
